@@ -57,7 +57,7 @@ class z2z:
 	def create_zendesk_ticket(self,event_id,event_status,subject):
 		#collaborators = self.zbx_evt_recipients(event_id)	
 		#description = '%s\n\nZabbix severity: %s' % (self.ydata['desc'],self.ydata['trigger']['severity'])
-                log.debug('create_zendesk_ticket event_id:%s, event_status:%s, subject:%s' % (event_id,event_status,subject))
+        log.debug('create_zendesk_ticket event_id:%s, event_status:%s, subject:%s' % (event_id,event_status,subject))
 		description = self.ydata['desc'].replace('"','')
 		priority = 'high' if self.ydata['severity'] == 'High' else 'normal'
 		tkt_data = { 'ticket': {
