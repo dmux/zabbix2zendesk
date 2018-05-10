@@ -1,7 +1,6 @@
 #! /bin/env python
 # -*- coding: utf-8 -*-
 
- 
 import json
 import logging as log
 import MySQLdb
@@ -16,7 +15,7 @@ from inspect import currentframe
 import collections
 import pdb
 
-log.basicConfig(level=log.DEBUG, filename='/datadir/zabbix_logs/zabbix2zendesk.log', 
+log.basicConfig(level=log.DEBUG, filename='zabbix2zendesk.log',
 	format='%(process)d %(asctime)s %(levelname)s %(message)s')
 
 def lino(): return currentframe().f_back.f_lineno
@@ -57,7 +56,7 @@ class z2z:
 	def create_zendesk_ticket(self,event_id,event_status,subject):
 		#collaborators = self.zbx_evt_recipients(event_id)	
 		#description = '%s\n\nZabbix severity: %s' % (self.ydata['desc'],self.ydata['trigger']['severity'])
-        log.debug('create_zendesk_ticket event_id:%s, event_status:%s, subject:%s' % (event_id,event_status,subject))
+                log.debug('create_zendesk_ticket event_id:%s, event_status:%s, subject:%s' % (event_id,event_status,subject))
 		description = self.ydata['desc'].replace('"','')
 		priority = 'high' if self.ydata['severity'] == 'High' else 'normal'
 		tkt_data = { 'ticket': {
@@ -66,7 +65,7 @@ class z2z:
 			'set_tags': ['zabbix'],
 			'external_id': event_id,
 			'priority': priority,
-			'group_id': '20684615',
+			#'group_id': '20684615',
 			'requester_id': self.zd_enduser['id'],
 			'submitter_id': self.zd_enduser['id'],
 			'organization_id': self.zd_enduser['organization_id'],
